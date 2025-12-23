@@ -19,14 +19,32 @@ export class Calculator {
     }
 
     /**
-     * Evaluates a mathematical expression
-     * @param {string} expression - Mathematical expression to evaluate
-     * @returns {string} Result as string or "Error"
-     */
+   * Evaluates a mathematical expression
+   * @param {string} expression - Mathematical expression to evaluate
+   * @returns {string} Result as string or "Error"
+   */
     evaluate(expression) {
         try {
+            // Handle null/undefined
+            if (expression == null || expression === undefined) {
+                return 'Error';
+            }
+
+            // Convert to string if needed
+            const expr = String(expression).trim();
+
+            // Check for empty expression
+            if (expr === '') {
+                return 'Error';
+            }
+
+            // Validate parentheses
+            if (!this.validateParentheses(expr)) {
+                return 'Error';
+            }
+
             // Preprocess expression: convert symbols
-            const processedExpr = this.preprocessExpression(expression);
+            const processedExpr = this.preprocessExpression(expr);
 
             // Evaluate using math engine
             const result = this.mathEngine.evaluate(processedExpr);
@@ -45,6 +63,36 @@ export class Calculator {
         } catch (error) {
             return 'Error';
         }
+    }
+
+    /**
+     * Validates that parentheses are balanced
+     * @param {string} expr - Expression to validate
+     * @returns {boolean} True if parentheses are balanced
+     * @private
+     */
+    validateParentheses(expr) {
+        const open = (expr.match(/\(/g) || []).length;
+        const close = (expr.match(/\)/g) || []).length;
+
+        if (open !== close) {
+            return false;
+        }
+
+        // Check for empty parentheses
+        if (expr.includes('()')) {
+            return false;
+        }
+
+        // Check for proper nesting
+        let depth = 0;
+        for (const char of expr) {
+            if (char === '(') depth++;
+            if (char === ')') depth--;
+            if (depth < 0) return false;
+        }
+
+        return depth === 0;
     }
 
     /**
