@@ -1,0 +1,111 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    font-family: 'Space Grotesk', sans-serif;
+  }
+}
+
+@layer components {
+  /* Calculator Container */
+  .calculator-container {
+    @apply transition-all duration-300;
+  }
+  
+  /* Display Area */
+  .display-area {
+    @apply transition-colors duration-200;
+  }
+  
+  /* Button Base Styles */
+  .btn {
+    @apply px-4 py-3 rounded-xl font-medium text-lg transition-all duration-150;
+    @apply hover:scale-105 active:scale-95;
+    @apply focus:outline-none focus:ring-2 focus:ring-offset-2;
+  }
+  
+  /* Button Variants */
+  .btn-number {
+    @apply bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white;
+    @apply hover:bg-gray-200 dark:hover:bg-gray-600;
+    @apply focus:ring-gray-400;
+  }
+  
+  .btn-operator {
+    @apply bg-blue-500 text-white;
+    @apply hover:bg-blue-600;
+    @apply focus:ring-blue-400;
+  }
+  
+  .btn-function {
+    @apply bg-purple-100 dark:bg-purple-900 text-purple-700 dark:text-purple-200;
+    @apply hover:bg-purple-200 dark:hover:bg-purple-800;
+    @apply focus:ring-purple-400;
+    @apply text-sm;
+  }
+  
+  .btn-special {
+    @apply bg-gray-200 dark:bg-gray-600 text-gray-700 dark:text-gray-200;
+    @apply hover:bg-gray-300 dark:hover:bg-gray-500;
+    @apply focus:ring-gray-400;
+  }
+  
+  .btn-ac {
+    @apply bg-red-500 text-white;
+    @apply hover:bg-red-600;
+    @apply focus:ring-red-400;
+  }
+  
+  .btn-equals {
+    @apply bg-green-500 text-white;
+    @apply hover:bg-green-600;
+    @apply focus:ring-green-400;
+  }
+  
+  .btn-parenthesis {
+    @apply bg-orange-100 dark:bg-orange-900 text-orange-700 dark:text-orange-200;
+    @apply hover:bg-orange-200 dark:hover:bg-orange-800;
+    @apply focus:ring-orange-400;
+  }
+  
+  .btn-icon {
+    @apply p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700;
+    @apply transition-colors duration-150;
+    @apply focus:outline-none focus:ring-2 focus:ring-gray-400;
+  }
+  
+  /* Material Icons */
+  .material-symbols-outlined {
+    @apply text-2xl;
+  }
+}
+
+@layer utilities {
+  /* Custom animations */
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+  }
+  
+  .animate-fade-in {
+    animation: fadeIn 0.3s ease-out;
+  }
+  
+  .animate-pulse-once {
+    animation: pulse 0.3s ease-in-out;
+  }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  body {
+    @apply bg-gray-900 text-white;
+  }
+}
