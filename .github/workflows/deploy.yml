@@ -41,7 +41,8 @@ jobs:
       - name: Copy standalone calculator
         run: |
           mkdir -p dist
-          cp calculator-standalone.html dist/
+          cp calculator-standalone.html dist/index.html
+          cp calculator-standalone.html dist/calculator-standalone.html
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
